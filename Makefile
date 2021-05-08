@@ -15,4 +15,4 @@ main.o : rounds.h
 	$(CC) $(CFLAGS) main.c
 	    
 clean:
-	rm -f *.o rounds
+	del *.o
