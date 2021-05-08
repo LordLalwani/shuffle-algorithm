@@ -1,18 +1,21 @@
-all: rounds
-OBJS = main.o rounds.o
+all: builder
+OBJS = main.o rounds.o dataStructure.o
 CC = gcc
 DEBUG = -g
 CFLAGS = -Wall -O3 -c -std=c11
 LFLAGS = -Wall $(DEBUG)
 
-rounds : $(OBJS)
-	$(CC) $(OBJS) -o rounds $(LFLAGS)
+builder : $(OBJS)
+	$(CC) $(OBJS) -o main $(LFLAGS)
 
 rounds.o : src\header-files\rounds.h
 	$(CC) $(CFLAGS) src\source-files\rounds.c
+
+dataStructure.o : src\header-files\dataStructure.h
+	$(CC) $(CFLAGS) src\source-files\dataStructure.c
 
 main.o : src\header-files\rounds.h
 	$(CC) $(CFLAGS) src\source-files\main.c
 	    
 clean:
-	del *.o
+	del *.o *.exe
