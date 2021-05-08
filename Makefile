@@ -8,11 +8,11 @@ LFLAGS = -Wall $(DEBUG)
 rounds : $(OBJS)
 	$(CC) $(OBJS) -o rounds $(LFLAGS)
 
-rounds.o : rounds.h
-	$(CC) $(CFLAGS) rounds.c
+rounds.o : src\header-files\rounds.h
+	$(CC) $(CFLAGS) src\source-files\rounds.c
 
-main.o : rounds.h
-	$(CC) $(CFLAGS) main.c
+main.o : src\header-files\rounds.h
+	$(CC) $(CFLAGS) src\source-files\main.c
 	    
 clean:
 	del *.o
