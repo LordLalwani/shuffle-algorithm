@@ -32,21 +32,20 @@ void deleteList(list_t **list) {
  */
 bool initializeLists(list_t **handList, list_t **tableList, unsigned long numberOfCards) {
     *handList = createList();
-    if (*handList == NULL) {
-        return false;
-    }
-
     *tableList = createList();
-    if (*tableList == NULL) {
+
+    if (*tableList == NULL || *handList == NULL) {
         // cleanup already allocated memory
         deleteList(handList);
+        deleteList(tableList);
         return false;
     }
 
     // initialize cards for hand.
     bool is_valid = initializeCards(*handList, numberOfCards);
+
     if (!is_valid) {
-        // cleanup already allocated memory from before
+        // cleanup already allocated memory
         deleteList(handList);
         deleteList(tableList);
         return false;
