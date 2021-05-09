@@ -19,7 +19,7 @@ This algorithm will determine how many rounds are required to get the deck of ca
 
 ## Limitations / future upgrade notes
 
-1. Testing: Due to a lack of time I haven't been able to get the testing effort of this codebase to a satisfactory level, this will be included in the future. 
+1. Testing: Due to a lack of time I haven't been able to get the testing effort of this code base to a satisfactory level, this will be included in the future. 
 
 ---
 
@@ -28,7 +28,7 @@ This algorithm will determine how many rounds are required to get the deck of ca
 2. Make (build/packaging tool)
 
 
-## Compile, Build & Create A Executible
+## Compile, Build & Create A Executable
 
 ```bash
 make build
