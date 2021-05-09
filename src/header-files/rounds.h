@@ -10,6 +10,6 @@
 #include "./dataStructure.h"
 #include "./deckActions.h"
 
-bool calculateRounds(unsigned long number_of_cards, unsigned long *rounds);
+bool calculateRounds(unsigned long numberOfCards, unsigned long *rounds);
 
 #endif

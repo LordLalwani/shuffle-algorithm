@@ -11,8 +11,8 @@
 
 //#define DEBUG_INFOS
 
-card_t *newCard(unsigned long number);
-bool addNewCard(list_t *l, unsigned int number);
-bool initializeCards(list_t *hand, unsigned long numberOfCards);
+card_t *newCard(unsigned long cardNumber);
+bool addNewCard(list_t *list, unsigned int cardNumber);
+bool initializeCards(list_t *handList, unsigned long numberOfCards);
 bool isCardNumberValid(const char *inputChar, unsigned long *numberOfCards);
 #endif
