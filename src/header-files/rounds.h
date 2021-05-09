@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "./card.h"
 #include "./dataStructure.h"
 #include "./deckActions.h"
 

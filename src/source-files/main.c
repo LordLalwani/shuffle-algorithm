@@ -6,31 +6,6 @@
 #include <string.h>
 
 #include "../header-files/rounds.h"
-/*
- * validates that a card is a postive number of type unsigned long (positve)
- */
-bool isCardNumberValid(const char *inputChar, unsigned long *numberOfCards) {
-    if (inputChar == NULL ||
-        *inputChar == '\0' ||
-        isspace(*inputChar) ||
-        strstr(inputChar, "-")) {
-        return false;
-    }
-
-    errno = 0;
-    char *endp;
-
-    // converts string to unsigned long int, this also overrides initialNumberOfCards in main.
-    *numberOfCards = strtoul(inputChar, &endp, 10);
-
-    if (*endp != '\0' ||
-        endp == inputChar ||
-        (*numberOfCards == ULONG_MAX && errno == ERANGE)) {
-        return false;
-    }
-
-    return true;
-}
 
 int main(int argc, char *argv[]) {
     unsigned long initialRounds = 0;
