@@ -53,7 +53,7 @@ bool calculateRounds(unsigned long numberOfCards, unsigned long *rounds) {
         pickupHand(&handList, &tableList);
 
 #ifdef DEBUG_INFOS
-        print(hand);
+        print(handList);
 #endif
 
         isEqual = isHandSorted(handList, numberOfCards);

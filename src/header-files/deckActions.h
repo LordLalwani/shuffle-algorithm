@@ -8,7 +8,7 @@
 
 #include "./type.h"
 
-//#define DEBUG_INFOS
+// #define DEBUG_INFOS
 
 card_t *removeFront(list_t *l);
 void insertFront(list_t *l, card_t *c);

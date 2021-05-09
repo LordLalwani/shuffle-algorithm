@@ -46,10 +46,10 @@ void insertBack(list_t *list, card_t *card) {
 /*
  * prints the complete list of cards
  */
-void print(list_t *l) {
-    card_t *currentCard = l->front;
+void print(list_t *handList) {
+    card_t *currentCard = handList->front;
 
-    printf("hand: ");
+    printf("Current Hand: ");
     while (currentCard != NULL) {
         printf("%lu ", currentCard->number);
         currentCard = currentCard->next;
