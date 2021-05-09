@@ -1,4 +1,5 @@
 all: builder
+build: clean all
 OBJS = main.o rounds.o dataStructure.o card.o deckActions.o
 CC = gcc
 DEBUG = -g

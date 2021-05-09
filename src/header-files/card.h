@@ -10,7 +10,7 @@
 
 //#define DEBUG_INFOS
 
-card_t *new_card(unsigned long number);
-bool add_new_card(list_t *l, unsigned int number);
-bool init_cards(list_t *hand, unsigned long number_of_cards);
+card_t *newCard(unsigned long number);
+bool addNewCard(list_t *l, unsigned int number);
+bool initializeCards(list_t *hand, unsigned long numberOfCards);
 #endif

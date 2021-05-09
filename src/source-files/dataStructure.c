@@ -1,54 +1,54 @@
 #include "../header-files/dataStructure.h"
 
 /*
- * allocates an empty list  
+ * creates an empty list with memory allocation
  */
-static list_t *create_empty_list() {
-    list_t *l = (list_t *)malloc(sizeof(list_t));
-    l->front = NULL;
-    l->back = NULL;
+static list_t *createList() {
+    list_t *list = (list_t *)malloc(sizeof(list_t));
+    list->front = NULL;
+    list->back = NULL;
 
-    return l;
+    return list;
 }
 
 /*
- * deallocates the entire list
+ * deletes the entire list from memory.
  */
-void delete_list(list_t **l) {
-    card_t *curr = (*l)->front;
+void deleteList(list_t **list) {
+    card_t *currentCard = (*list)->front;
 
-    while (curr) {
-        card_t *to_del = curr;
-        curr = curr->next;
+    while (currentCard) {
+        card_t *to_del = currentCard;
+        currentCard = currentCard->next;
         free(to_del);
     }
 
-    free(*l);
-    *l = NULL;
+    free(*list);
+    *list = NULL;
 }
 
 /*
- * allocated memory for hand and table and initializes the hand
+ * Allocates memory to lists and sets up cards in the hand.
  */
-bool init_lists(list_t **hand, list_t **table, unsigned long number_of_cards) {
-    // allocate memory for hand
-    *hand = create_empty_list();
-    if (*hand == NULL) {
-        return false;  // return false if memory allocation for hand fails
+bool initializeLists(list_t **handList, list_t **tableList, unsigned long numberOfCards) {
+    *handList = createList();
+    if (*handList == NULL) {
+        return false;
     }
 
-    // allocate memory for table
-    *table = create_empty_list();
-    if (*table == NULL) {
-        delete_list(hand);  // cleanup already allocated memory from before
-        return false;       // return false if memory allocation for table fails
+    *tableList = createList();
+    if (*tableList == NULL) {
+        // cleanup already allocated memory
+        deleteList(handList);
+        return false;
     }
 
-    // initialize cards for hand
-    bool is_valid = init_cards(*hand, number_of_cards);
+    // initialize cards for hand.
+    bool is_valid = initializeCards(*handList, numberOfCards);
     if (!is_valid) {
-        delete_list(hand);   // cleanup already allocated memory from before
-        delete_list(table);  // cleanup already allocated memory from before
+        // cleanup already allocated memory from before
+        deleteList(handList);
+        deleteList(tableList);
         return false;
     }
 

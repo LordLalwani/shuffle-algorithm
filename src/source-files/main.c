@@ -7,23 +7,25 @@
 
 #include "../header-files/rounds.h"
 /*
- * checks if the char string is a valid postive number of type unsigned long
+ * validates that a card is a postive number of type unsigned long (positve)
  */
-bool is_pos_numeric(const char *c_str, unsigned long *number) {
-    if (c_str == NULL ||
-        *c_str == '\0' ||
-        isspace(*c_str) ||
-        strstr(c_str, "-")) {
+bool isCardNumberValid(const char *inputChar, unsigned long *numberOfCards) {
+    if (inputChar == NULL ||
+        *inputChar == '\0' ||
+        isspace(*inputChar) ||
+        strstr(inputChar, "-")) {
         return false;
     }
 
     errno = 0;
     char *endp;
-    *number = strtoul(c_str, &endp, 10);
+
+    // converts string to unsigned long int, this also overrides initialNumberOfCards in main.
+    *numberOfCards = strtoul(inputChar, &endp, 10);
 
     if (*endp != '\0' ||
-        endp == c_str ||
-        (*number == ULONG_MAX && errno == ERANGE)) {
+        endp == inputChar ||
+        (*numberOfCards == ULONG_MAX && errno == ERANGE)) {
         return false;
     }
 
@@ -31,27 +33,26 @@ bool is_pos_numeric(const char *c_str, unsigned long *number) {
 }
 
 int main(int argc, char *argv[]) {
-    // argc should be 2 for a correct execution
+    unsigned long initialRounds = 0;
+    unsigned long initialNumberOfCards = 0;
+
+    // ensures only two arguments are entered and gives user feedback if they don't have the right inputs.
     if (argc != 2) {
-        printf("usage: %s #number_of_cards\n", argv[0]);  // argv[0] is the program name
+        printf("%s <NUMBER_OF_CARDS_REQUIRED>\n", argv[0]);
         return -1;
     }
 
-    unsigned long number_of_cards = 0;
-    // converts the second command line argument to a unsigned long
-    // checks if the converted number is a positive number
-    if (!is_pos_numeric(argv[1], &number_of_cards)) {
-        printf("invalid number of rounds\n");
+    if (!isCardNumberValid(argv[1], &initialNumberOfCards)) {
+        printf("Invalid number of rounds\n");
         return -1;
     }
 
-    unsigned long rounds = 0;
-    if (!get_number_of_rounds(number_of_cards, &rounds)) {
+    if (!calculateRounds(initialNumberOfCards, &initialRounds)) {
         printf("error: get_number_of_rounds, run out of memory or overflow of variable rounds\n");
         return -1;
     }
 
-    printf("number of cards: %lu, rounds: %lu\n", number_of_cards, rounds);
+    printf("number of cards: %lu, rounds: %lu\n", initialNumberOfCards, initialRounds);
 
     return 0;
 }

@@ -11,7 +11,7 @@
 
 //#define DEBUG_INFOS
 
-bool init_lists(list_t **hand, list_t **table, unsigned long number_of_cards);
-void delete_list(list_t **l);
+bool initializeLists(list_t **hand, list_t **table, unsigned long number_of_cards);
+void deleteList(list_t **l);
 
 #endif

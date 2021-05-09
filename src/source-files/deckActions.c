@@ -3,11 +3,11 @@
 /*
  * removes the first card from the list and returns it
  */
-card_t *remove_front(list_t *l) {
-    card_t *front = l->front;
+card_t *removeFront(list_t *list) {
+    card_t *front = list->front;
 
-    if (l->front) {
-        l->front = l->front->next;
+    if (list->front) {
+        list->front = list->front->next;
     }
 
     return front;
@@ -16,30 +16,30 @@ card_t *remove_front(list_t *l) {
 /*
  * inserts a new card at the beginning of the list
  */
-void insert_front(list_t *l, card_t *c) {
-    c->next = NULL;
+void insertFront(list_t *list, card_t *card) {
+    card->next = NULL;
 
-    if (l->front == NULL) {
-        l->front = c;
-        l->back = c;
+    if (list->front == NULL) {
+        list->front = card;
+        list->back = card;
     } else {
-        c->next = l->front;
-        l->front = c;
+        card->next = list->front;
+        list->front = card;
     }
 }
 
 /*
  * inserts a new card at the end of the list
  */
-void insert_back(list_t *l, card_t *c) {
-    c->next = NULL;
+void insertBack(list_t *list, card_t *card) {
+    card->next = NULL;
 
-    if (l->front == NULL) {
-        l->front = c;
-        l->back = c;
+    if (list->front == NULL) {
+        list->front = card;
+        list->back = card;
     } else {
-        l->back->next = c;
-        l->back = c;
+        list->back->next = card;
+        list->back = card;
     }
 }
 
@@ -47,12 +47,12 @@ void insert_back(list_t *l, card_t *c) {
  * prints the complete list of cards
  */
 void print(list_t *l) {
-    card_t *curr = l->front;
+    card_t *currentCard = l->front;
 
     printf("hand: ");
-    while (curr != NULL) {
-        printf("%lu ", curr->number);
-        curr = curr->next;
+    while (currentCard != NULL) {
+        printf("%lu ", currentCard->number);
+        currentCard = currentCard->next;
     }
     printf("\n");
 }
@@ -60,16 +60,16 @@ void print(list_t *l) {
 /*
  * checks if the list is sorted by increasing numbers
  */
-bool is_sorted(list_t *hand, int number_of_cards) {
-    unsigned long curr_number = 0;
-    card_t *curr = hand->front;
+bool isHandSorted(list_t *handList, int numberOfCards) {
+    unsigned long currentNumber = 0;
+    card_t *currentCard = handList->front;
 
-    for (curr_number = 0; curr_number < number_of_cards; curr_number++) {
-        if (curr->number != curr_number) {
+    for (currentNumber = 0; currentNumber < numberOfCards; currentNumber++) {
+        if (currentCard->number != currentNumber) {
             return false;
         }
 
-        curr = curr->next;
+        currentCard = currentCard->next;
     }
 
     return true;
@@ -78,8 +78,8 @@ bool is_sorted(list_t *hand, int number_of_cards) {
 /*
  * picks up all cards from the card from the table and assigns it to hand
  */
-void pickup_hand(list_t **hand, list_t **table) {
-    list_t *tmp = *hand;
-    *hand = *table;
-    *table = tmp;
+void pickupHand(list_t **handList, list_t **tableList) {
+    list_t *tmp = *handList;
+    *handList = *tableList;
+    *tableList = tmp;
 }

@@ -1,14 +1,14 @@
 #include "../header-files/card.h"
 
 /*
- * creates a new card node
+ * Builds a new card node
  */
-card_t *new_card(unsigned long number) {
+card_t *newCard(unsigned long cardNumber) {
     card_t *node = (card_t *)malloc(sizeof(card_t));
 
     // error checking
     if (node != NULL) {
-        node->number = number;
+        node->number = cardNumber;
         node->next = NULL;
     }
 
@@ -16,35 +16,38 @@ card_t *new_card(unsigned long number) {
 }
 
 /*
- * inserts a new card at the end of the list
+ * inserts a new card at the end of the list.
  */
-bool add_new_card(list_t *l, unsigned int number) {
-    card_t *c = new_card(number);
+bool addNewCard(list_t *handList, unsigned int cardNumber) {
+    card_t *c = newCard(cardNumber);
 
     // error checking
     if (c == NULL) {
         return false;
     }
 
-    if (l->front == NULL) {
-        l->front = c;
-        l->back = c;
+    if (handList->front == NULL) {
+        handList->front = c;
+        handList->back = c;
     } else {
-        l->back->next = c;
-        l->back = c;
+        handList->back->next = c;
+        handList->back = c;
     }
 
     return true;
 }
 
-bool init_cards(list_t *hand, unsigned long number_of_cards) {
+/*
+ * initializes cards and assigns them to a hand list.
+ */
+bool initializeCards(list_t *handList, unsigned long numberOfCards) {
     unsigned long i = 0;
-    bool is_valid = true;
+    bool isValid = true;
 
-    for (i = 0; i < number_of_cards; i++) {
-        is_valid = add_new_card(hand, i);
+    for (i = 0; i < numberOfCards; i++) {
+        isValid = addNewCard(handList, i);
 
-        if (!is_valid) {
+        if (!isValid) {
             return false;
         }
     }

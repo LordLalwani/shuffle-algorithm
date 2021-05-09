@@ -3,74 +3,72 @@
 /*
  * runs one round of the card shuffling algorithm
  */
-static void next_round(list_t *hand, list_t *table) {
-    card_t *top_card = NULL;
+static void nextRound(list_t *handList, list_t *tableList) {
+    card_t *topCard = NULL;
 
-    while (hand->front) {  // check if cards are available
-        top_card = NULL;
+    // check if cards are available
+    while (handList->front) {
+        topCard = NULL;
 
         // Take the top card off the hand and set it on the table
-        top_card = remove_front(hand);
-        insert_front(table, top_card);
+        topCard = removeFront(handList);
+        insertFront(tableList, topCard);
         // no cards on table
-        if (!top_card) {
+        if (!topCard) {
             break;
         }
 
         // Take the next card off the top and put it on the bottom of the hand in your hand
-        top_card = remove_front(hand);
+        topCard = removeFront(handList);
         // no cards in hand
-        if (!top_card) {
+        if (!topCard) {
             break;
         }
-        insert_back(hand, top_card);
+        insertBack(handList, topCard);
     }
 }
 
 /*
- * determines how many rounds it will take to put a deck back into the original order
+ * calculates how many rounds we require to get the deck back into the original state.
  */
-bool get_number_of_rounds(unsigned long number_of_cards, unsigned long *rounds) {
-    if (number_of_cards <= 2) {
-        *rounds = number_of_cards;
+bool calculateRounds(unsigned long numberOfCards, unsigned long *rounds) {
+    list_t *handList = NULL;
+    list_t *tableList = NULL;
+
+    if (numberOfCards <= 2) {
+        *rounds = numberOfCards;
         return true;
     }
 
-    // define hand and table (both are a list of cards)
-    list_t *hand = NULL;
-    list_t *table = NULL;
-
-    // allocate memory for hand and table
-    // initialize hand
-    if (!init_lists(&hand, &table, number_of_cards)) {
+    if (!initializeLists(&handList, &tableList, numberOfCards)) {
         return false;
     }
 
-    bool is_equal = false;
-    bool is_overflow = false;
+    bool isEqual = false;
+    bool isOverflow = false;
 
     do {
         (*rounds)++;
-        next_round(hand, table);
-        pickup_hand(&hand, &table);
+        nextRound(handList, tableList);
+        pickupHand(&handList, &tableList);
 
 #ifdef DEBUG_INFOS
         print(hand);
 #endif
 
-        is_equal = is_sorted(hand, number_of_cards);
+        isEqual = isHandSorted(handList, numberOfCards);
 
         // check for an overflow of rounds
-        if (*rounds == ULONG_MAX && !is_equal) {
-            is_overflow = true;
+        if (*rounds == ULONG_MAX && !isEqual) {
+            isOverflow = true;
             break;
         }
-    } while (!is_equal);
+    } while (!isEqual);
 
-    delete_list(&hand);
-    delete_list(&table);
+    deleteList(&handList);
+    deleteList(&tableList);
 
-    if (is_overflow) {
+    if (isOverflow) {
         return false;
     }
 
