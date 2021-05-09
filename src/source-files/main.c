@@ -1,10 +1,3 @@
-#include <ctype.h>
-#include <errno.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "../header-files/rounds.h"
 
 int main(int argc, char *argv[]) {
